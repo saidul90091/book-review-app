@@ -39,7 +39,7 @@
                     <div class="card-header text-white">
                         Edit Book
                     </div>
-                    <form action="{{ route('books.update') }}" method="POST" enctype="multipart/form-data">
+                    <form action="{{ route('books.update', $book->id) }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="card-body">
                             <div class="mb-3">
@@ -76,8 +76,8 @@
                             <div class="mb-3">
                                 <label for="status" class="form-label">Status</label>
                                 <select name="status" id="status" class="form-control">
-                                    <option value="1">Active</option>
-                                    <option value="0">Block</option>
+                                    <option value="1" {{($book->status == 1) ? 'selected' : ''}}>Active</option>
+                                    <option value="0" {{($book->status == 1) ? 'selected' : ''}}>Block</option>
                                 </select>
                             </div>
                             <button type="submit" class="btn btn-primary mt-2">Update</button>
