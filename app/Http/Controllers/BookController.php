@@ -6,6 +6,7 @@ use App\Models\Book;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
 
 class BookController extends Controller
 {
@@ -19,7 +20,13 @@ class BookController extends Controller
             $books->where('title','like','%'.$request->keyword.'%');
         }
 
-        $books = $books->paginate(3);
+        $books = $books->paginate(10);
+
+           // Limit the description for each book
+           foreach ($books as $book) {
+            $book->short_description = Str::limit($book->description, 30, '...');
+        }
+
 
         return view('books.list',[
             'books' => $books
@@ -156,4 +163,12 @@ class BookController extends Controller
             ]);
         }
     }
+
+   
+
+
+
+
+
+
 }

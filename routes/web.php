@@ -2,11 +2,16 @@
 
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\BookController;
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('account.register');
-});
+// Route::get('/', function () {
+//     return view('account.register');
+// });
+
+Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('book/{id}', [HomeController::class, 'detail'])->name('book.detail');
+Route::post('book-reviwe-save', [HomeController::class, 'saveReview'])->name('book.saveReview');
 
 
 Route::group(['prefix' => 'account'], function () {

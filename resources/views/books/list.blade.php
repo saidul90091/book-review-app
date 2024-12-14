@@ -64,7 +64,8 @@
                                             <td><img width="50px;" height="50px" src="{{ asset('/uploads/books/' . $book->image) }}"
                                                     alt=""></td>
                                             <td>{{ $book->author }}</td>
-                                            <td>{{ $book->description }}</td>
+                                            {{-- <td>{{ Str::limit($book->description, 30, '...') }}</td> --}}
+                                            <td class="" title="{{$book->description}}">{{ $book->short_description }}</td>
                                             <td>
                                                 @if ($book->status == 1)
                                                     <span class="text-success">Active</span>
