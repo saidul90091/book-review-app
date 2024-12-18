@@ -20,7 +20,7 @@ class BookController extends Controller
             $books->where('title','like','%'.$request->keyword.'%');
         }
 
-        $books = $books->paginate(10);
+        $books = $books->paginate(8);
 
            // Limit the description for each book
            foreach ($books as $book) {
@@ -164,7 +164,7 @@ class BookController extends Controller
         }
     }
 
-   
+
 
 
 

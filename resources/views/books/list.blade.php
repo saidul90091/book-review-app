@@ -4,32 +4,7 @@
     <div class="container">
         <div class="row my-5">
             <div class="col-md-3">
-                <div class="card border-0 shadow-lg">
-                    <div class="card-header  text-white">
-                        Welcome, {{ Auth::user()->name }}
-                    </div>
-                    <div class="card-body">
-                        <div class="text-center mb-3">
-                            @if (Auth::user()->image !== '')
-                                <img src="{{ asset('uploads/profile/' . Auth::user()->image) }}"
-                                    class="img-fluid rounded-circle" alt="Luna John">
-                            @endif
-                        </div>
-                        <div class="h5 text-center">
-                            <strong>{{ Auth::user()->name }}</strong>
-
-                            <p class="h6 mt-2 text-muted">5 Reviews</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="card border-0 shadow-lg mt-3">
-                    <div class="card-header  text-white">
-                        Navigation
-                    </div>
-                    <div class="card-body sidebar">
-                        @include('layouts.sidebar')
-                    </div>
-                </div>
+                @include('layouts.sidebar')
             </div>
             <div class="col-md-9">
                 @include('layouts.message')
@@ -39,10 +14,10 @@
                             <a href="{{ route('books.create') }}" class="btn btn-primary">Add Book</a>
                             <form action="" method="get">
                                 <div class="d-flex">
-                                    <input type="text" id="search" name="keyword" class="form-control"
+                                    <input type="text" value="{{Request::get('keyword')}}" id="search" name="keyword" class="form-control"
                                         placeholder="Search">
                                     <button class="btn btn-primary ms-1" type="submit">Searh</button>
-                                    <a class="btn btn-warning ms-1" href="{{ route('books.index') }}">Clear</a>
+                                    <a class="btn btn-warning ms-1 w-50" href="{{ route('books.index') }}">All Books</a>
                                 </div>
                             </form>
                         </div>
@@ -110,7 +85,7 @@
         function deleteBook(id) {
             if (confirm("Are you sure want to delete")) {
                 $.ajax({
-                    url: '{{ route('books.destroy') }}',
+                    url: '{{ route("books.destroy") }}',
                     type: 'delete',
                     data: {
                         id: id
@@ -119,7 +94,7 @@
                         'X-CSRF-TOKEN':'{{csrf_token() }}'
                     },
                     success: function(response) {
-                        window.location.href = '{{ route('books.index') }}';
+                        window.location.href = '{{ route("books.index") }}';
                     }
                 });
             }
